@@ -1,4 +1,4 @@
-# Context Engineering Skill — v1 Design
+# AI-Contexture Skill — v1 Design
 
 **Date:** 2026-08-25  
 **Status:** Design approved for review
@@ -81,7 +81,7 @@ Re-running the skill should not keep rearranging an already-optimized project.
 ## 3. v1 Skill Layout
 
 ```text
-context-engineering/
+skills/ai-contexture/
 ├── SKILL.md
 └── references/
     ├── classify.md
@@ -90,6 +90,11 @@ context-engineering/
 ```
 
 No extra files are created unless needed.
+
+`SKILL.md` frontmatter sets `context: fork` and `background: false`. The skill
+runs as an isolated subagent, so discovery and classification never enter the
+main context; only the proposal returns. It blocks rather than backgrounding,
+because a backgrounded fork loses the tools needed to apply approved changes.
 
 ## 4. Classification
 
@@ -178,6 +183,9 @@ A concise context-quality instruction should also be treated as `CORE` when it g
 6. Do not modify files before approval.
 7. Apply the approved plan.
 8. Verify with `references/verify.md`.
+
+Approval spans two turns. The fork ends after step 6 with the proposal; steps 7
+and 8 run after approval, outside it.
 
 ## 8. Verification
 

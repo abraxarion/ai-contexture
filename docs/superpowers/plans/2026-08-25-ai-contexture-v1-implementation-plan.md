@@ -1,14 +1,14 @@
-# Context Engineering v1 Implementation Plan
+# AI-Contexture v1 Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Build a minimal Claude Code `context-engineering` skill that improves task quality through relevant, precise, brief context while minimizing expected total session cost.
+**Goal:** Build a minimal Claude Code `ai-contexture` skill that improves task quality through relevant, precise, brief context while minimizing expected total session cost.
 
 **Architecture:** One short orchestration file delegates three decisions to three short reference files: classify, route, verify. v1 stays metadata-free, but its categories and transformations remain stable enough to map later to compiler metadata and deterministic stages.
 
 **Tech Stack:** Markdown, Claude Code skills/rules conventions.
 
-**Spec:** `context-engineering-v1-design.md`
+**Spec:** `ai-contexture-v1-design.md`
 
 ## Global Constraints
 
@@ -31,7 +31,7 @@
 Create exactly:
 
 ```text
-context-engineering/
+skills/ai-contexture/
 ├── SKILL.md
 └── references/
     ├── classify.md
@@ -53,7 +53,7 @@ No manifest, scripts, telemetry, or compiler files in v1.
 ### Task 1: Implement the classifier contract
 
 **Files:**
-- Create: `context-engineering/references/classify.md`
+- Create: `skills/ai-contexture/references/classify.md`
 
 **Interfaces:**
 - Consumes: meaningful instructions extracted from project context files.
@@ -90,7 +90,7 @@ Run:
 
 ```bash
 grep -E 'CORE|PATH|CONTEXT|WORKFLOW|LOCAL|DERIVABLE|DUPLICATE|CONFLICT' \
-  context-engineering/references/classify.md
+  skills/ai-contexture/references/classify.md
 ```
 
 Expected: all eight classes appear.
@@ -112,7 +112,7 @@ Reason: it must influence context acquisition before repository exploration.
 - [ ] **Step 4: Commit**
 
 ```bash
-git add context-engineering/references/classify.md
+git add skills/ai-contexture/references/classify.md
 git commit -m "feat: define context classification contract"
 ```
 
@@ -121,7 +121,7 @@ git commit -m "feat: define context classification contract"
 ### Task 2: Implement deterministic routing semantics
 
 **Files:**
-- Create: `context-engineering/references/route.md`
+- Create: `skills/ai-contexture/references/route.md`
 
 **Interfaces:**
 - Consumes: one class from `classify.md`.
@@ -159,7 +159,7 @@ Run:
 
 ```bash
 grep -E 'CORE|PATH|CONTEXT|WORKFLOW|LOCAL|DERIVABLE|DUPLICATE|CONFLICT' \
-  context-engineering/references/route.md
+  skills/ai-contexture/references/route.md
 ```
 
 Expected: every classifier class has a routing outcome.
@@ -182,7 +182,7 @@ Do not force a route when the source instruction is ambiguous; preservation wins
 - [ ] **Step 4: Commit**
 
 ```bash
-git add context-engineering/references/route.md
+git add skills/ai-contexture/references/route.md
 git commit -m "feat: define context routing rules"
 ```
 
@@ -191,7 +191,7 @@ git commit -m "feat: define context routing rules"
 ### Task 3: Implement verification
 
 **Files:**
-- Create: `context-engineering/references/verify.md`
+- Create: `skills/ai-contexture/references/verify.md`
 
 **Interfaces:**
 - Consumes: original context, proposed/applied changes.
@@ -244,7 +244,7 @@ Expected: it leaves the already-correct instruction in place.
 - [ ] **Step 5: Commit**
 
 ```bash
-git add context-engineering/references/verify.md
+git add skills/ai-contexture/references/verify.md
 git commit -m "feat: add context optimization verification"
 ```
 
@@ -253,10 +253,10 @@ git commit -m "feat: add context optimization verification"
 ### Task 4: Implement the orchestration skill
 
 **Files:**
-- Create: `context-engineering/SKILL.md`
-- Read: `context-engineering/references/classify.md`
-- Read: `context-engineering/references/route.md`
-- Read: `context-engineering/references/verify.md`
+- Create: `skills/ai-contexture/SKILL.md`
+- Read: `skills/ai-contexture/references/classify.md`
+- Read: `skills/ai-contexture/references/route.md`
+- Read: `skills/ai-contexture/references/verify.md`
 
 **Interfaces:**
 - Consumes: target project's `CLAUDE.md`, existing `.claude/rules/`, relevant skills, `CLAUDE.local.md`, and context files when present.
@@ -266,16 +266,22 @@ git commit -m "feat: add context optimization verification"
 
 ```markdown
 ---
-name: context-engineering
-description: Optimize Claude Code context for quality and total session cost.
+name: ai-contexture
+description: Use when a project's CLAUDE.md or context files need optimizing for task quality and total session cost.
+context: fork
+background: false
 ---
 
-# Context Engineering
+# AI-Contexture
 
 Improve task quality with relevant, precise, brief context while minimizing
 expected total session cost.
 
 ## Workflow
+
+Run discovery and classification in one isolated sub-agent.
+Return only the concise routing proposal to the main context.
+Do not load large discovery results into the main context.
 
 1. Inspect `CLAUDE.md` and existing Claude context files.
 2. Inventory meaningful instructions without losing unique intent.
@@ -313,10 +319,10 @@ Expected:
 Run:
 
 ```bash
-wc -l context-engineering/SKILL.md \
-      context-engineering/references/classify.md \
-      context-engineering/references/route.md \
-      context-engineering/references/verify.md
+wc -l skills/ai-contexture/SKILL.md \
+      skills/ai-contexture/references/classify.md \
+      skills/ai-contexture/references/route.md \
+      skills/ai-contexture/references/verify.md
 ```
 
 Expected: each file remains small enough to scan quickly. Do not add prose merely to hit or avoid an arbitrary line count.
@@ -326,7 +332,7 @@ Expected: each file remains small enough to scan quickly. Do not add prose merel
 Run:
 
 ```bash
-grep -RInE '(^|[[:space:]])@[^[:space:]]+\.md' context-engineering/ || true
+grep -RInE '(^|[[:space:]])@[^[:space:]]+\.md' skills/ai-contexture/ || true
 ```
 
 Expected: no active Markdown imports used as lazy-routing references.
@@ -334,8 +340,8 @@ Expected: no active Markdown imports used as lazy-routing references.
 - [ ] **Step 5: Commit**
 
 ```bash
-git add context-engineering/
-git commit -m "feat: add context-engineering skill"
+git add skills/ai-contexture/
+git commit -m "feat: add ai-contexture skill"
 ```
 
 ---
@@ -403,16 +409,16 @@ Expected: no unnecessary moves, rewrites, file splits, or wording churn.
 Run:
 
 ```bash
-find context-engineering -maxdepth 2 -type f -print | sort
+find skills/ai-contexture -maxdepth 2 -type f -print | sort
 ```
 
 Expected:
 
 ```text
-context-engineering/SKILL.md
-context-engineering/references/classify.md
-context-engineering/references/route.md
-context-engineering/references/verify.md
+skills/ai-contexture/SKILL.md
+skills/ai-contexture/references/classify.md
+skills/ai-contexture/references/route.md
+skills/ai-contexture/references/verify.md
 ```
 
 No manifest, compiler, telemetry, or unrelated files.
@@ -420,8 +426,8 @@ No manifest, compiler, telemetry, or unrelated files.
 - [ ] **Step 6: Commit acceptance adjustments only if needed**
 
 ```bash
-git add context-engineering/
-git commit -m "fix: tighten context-engineering acceptance behavior"
+git add skills/ai-contexture/
+git commit -m "fix: tighten ai-contexture acceptance behavior"
 ```
 
 Skip this commit when acceptance requires no changes.

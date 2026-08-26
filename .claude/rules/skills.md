@@ -1,10 +1,11 @@
 # Skills
 
-Applies to skills authored here, including `context-engineering/`.
+Applies to skills authored here, including `skills/ai-contexture/`.
 
 - Lay out a skill as `SKILL.md` plus `references/*.md`. Add nothing else.
-- Give frontmatter `name` and `description` only. Make the description one line
-  stating when to use the skill.
+- Give frontmatter `name` and `description`. Make the description one line
+  stating when to use the skill. Add `context: fork` and `background: false`
+  only when the skill must run in an isolated subagent.
 - Let `SKILL.md` name the workflow steps and delegate every definition to a
   reference file. Do not copy reference content into it.
 - Give each reference file one decision: `classify.md` owns the taxonomy,

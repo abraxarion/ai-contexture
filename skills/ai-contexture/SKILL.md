@@ -1,14 +1,20 @@
 ---
-name: context-engineering
-description: Optimize Claude Code context for quality and total session cost.
+name: ai-contexture
+description: Use when a project's CLAUDE.md or context files need optimizing for task quality and total session cost.
+context: fork
+background: false
 ---
 
-# Context Engineering
+# AI-Contexture
 
 Improve task quality with relevant, precise, brief context while minimizing
 expected total session cost.
 
 ## Workflow
+
+Run discovery and classification in one isolated sub-agent.
+Return only the concise routing proposal to the main context.
+Do not load large discovery results into the main context.
 
 1. Inspect `CLAUDE.md` and existing Claude context files.
 2. Inventory meaningful instructions without losing unique intent.
