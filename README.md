@@ -10,6 +10,7 @@ Your `CLAUDE.md` is loaded on every single turn. Most of what lives there doesn'
 <img alt="status" src="https://img.shields.io/badge/status-beta-orange?style=flat-square" />
 <img alt="Claude Code skill" src="https://img.shields.io/badge/Claude%20Code-skill-6E56CF?style=flat-square" />
 <img alt="dependencies" src="https://img.shields.io/badge/dependencies-none-brightgreen?style=flat-square" />
+<img alt="license MIT" src="https://img.shields.io/badge/license-MIT-green?style=flat-square" />
 
 <a href="#install">Install</a> · <a href="#usage">Usage</a> · <a href="#how-it-works">How it works</a> · <a href="#classification">Classification</a> · <a href="#routing">Routing</a> · <a href="#guarantees">Guarantees</a>
 
@@ -312,6 +313,10 @@ discipline the skill applies to your project.
 Intent lives in the spec, execution lives in the plan. **Change the spec before changing
 behavior.** Read `.claude/rules/docs.md` before writing under `docs/superpowers/`, and
 `.claude/rules/skills.md` before authoring or editing a skill.
+
+## License
+
+MIT © 2026 abraxarion — see [LICENSE](LICENSE).
 
 <div align="center">
 <sub>Built for <a href="https://claude.com/claude-code">Claude Code</a> · v0.1.0 beta</sub>

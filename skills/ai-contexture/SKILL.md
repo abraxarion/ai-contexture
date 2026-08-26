@@ -33,3 +33,5 @@ Do not load large discovery results into the main context.
 - Preserve or improve task quality before reducing context.
 - Judge context by total downstream value, not startup size alone.
 - Preserve when uncertain.
+
+<!-- MIT © 2026 abraxarion · github.com/abraxarion/ai-contexture -->
