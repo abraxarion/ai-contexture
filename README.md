@@ -244,18 +244,18 @@ have put in its place.
 <table>
 <tr><td width="50%" valign="top">
 
-**Nothing moves without approval**
+**Nothing moves without approval**:
 The skill proposes; you decide. No file is modified before you say so.
 
-**Unique intent is preserved**
+**Unique intent is preserved**: 
 Instructions are moved, not deleted. Deletion requires high confidence and explicit sign-off.
 
 </td><td width="50%" valign="top">
 
-**Idempotent**
+**Idempotent**: 
 Run it twice and the second run makes no changes. It won't churn an already-optimized project.
 
-**Judged by total session cost**
+**Judged by total session cost**: 
 Startup context, context acquisition, cache misses, tool calls, latency, and rework — not `CLAUDE.md` line count.
 
 </td></tr>
